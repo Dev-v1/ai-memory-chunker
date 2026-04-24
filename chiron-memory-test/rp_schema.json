@@ -1,0 +1,107 @@
+{
+  "input": {
+    "type": "object",
+    "required": ["question", "chunks"],
+    "properties": {
+      "endpoint": {
+        "type": "string",
+        "enum": ["/test", "/health"],
+        "default": "/test",
+        "description": "Which endpoint to invoke. Omit to default to /test."
+      },
+      "question": {
+        "type": "string",
+        "minLength": 3,
+        "description": "The question to answer. Required for /test."
+      },
+      "chunks": {
+        "type": "array",
+        "minItems": 1,
+        "description": "Text chunks to process through the schema. Required for /test.",
+        "items": {
+          "type": "object",
+          "required": ["text", "source"],
+          "properties": {
+            "text": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The chunk content."
+            },
+            "source": {
+              "type": "string",
+              "minLength": 1,
+              "description": "A label identifying where this chunk came from."
+            }
+          }
+        }
+      }
+    }
+  },
+  "output": {
+    "type": "object",
+    "properties": {
+      "session_id": {
+        "type": "string",
+        "description": "UUID for this test session."
+      },
+      "question": {
+        "type": "string"
+      },
+      "baseline": {
+        "type": "object",
+        "description": "Direct gpt-oss-20b answer with no schema, no chunks.",
+        "properties": {
+          "answer": { "type": "string" },
+          "confidence": { "type": "number" },
+          "sources_cited": { "type": "array", "items": { "type": "string" } },
+          "hallucination_risk": { "type": "string", "enum": ["low", "medium", "high"] }
+        }
+      },
+      "schema_result": {
+        "type": "object",
+        "description": "Answer produced by the full Memory Smart Chunking Schema pipeline.",
+        "properties": {
+          "answer": { "type": "string" },
+          "confidence": { "type": "number" },
+          "sources_cited": { "type": "array", "items": { "type": "string" } },
+          "hallucination_risk": { "type": "string", "enum": ["low", "medium", "high"] },
+          "cycles_used": { "type": "integer" },
+          "gate_passed": { "type": "boolean" },
+          "reasoning_trace": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "cycle": { "type": "integer" },
+                "insight": { "type": "string" },
+                "source": { "type": "string" },
+                "confidence": { "type": "number" }
+              }
+            }
+          }
+        }
+      },
+      "chunk_records": {
+        "type": "array",
+        "description": "Layer 3 audit trail — one record per processed chunk."
+      },
+      "working_memory_final": {
+        "type": "object",
+        "description": "Final state of Layer 2 Working Memory after all cycles."
+      },
+      "episodic_memory": {
+        "type": "array",
+        "description": "Layer 4 episodic memory entries stored during processing."
+      },
+      "verdict": {
+        "type": "string",
+        "enum": ["schema_better", "baseline_better", "equal"],
+        "description": "Auto-calculated comparison result."
+      },
+      "error": {
+        "type": "string",
+        "description": "Present only when the handler encountered an error."
+      }
+    }
+  }
+}

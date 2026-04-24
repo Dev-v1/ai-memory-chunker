@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "question": "What were the root causes of the 2008 financial crisis, and how did each one connect to the others to produce a systemic collapse?",
+    "requires_chunks": ["housing_bubble_overview", "securitisation_mechanism", "regulatory_failures"],
+    "why_hard": "Requires synthesising information across three distinct mechanisms — lending practices, securitisation incentives, and regulatory failures — to construct a causal chain."
+  },
+  {
+    "id": 2,
+    "question": "How did the collapse of Lehman Brothers trigger a freeze in the broader financial system, and what specific mechanisms caused ordinary businesses and workers to be affected?",
+    "requires_chunks": ["lehman_brothers_collapse", "credit_freeze_interbank", "real_economy_impact"],
+    "why_hard": "Requires tracing a transmission path from a single bank failure, through interbank markets, to the real economy — three separate chunks must be connected."
+  },
+  {
+    "id": 3,
+    "question": "To what extent was the government response to the 2008 crisis effective, and what reforms were put in place to prevent a recurrence?",
+    "requires_chunks": ["government_response_tarp", "dodd_frank_reforms", "regulatory_failures"],
+    "why_hard": "Requires evaluating both the crisis-time intervention (TARP) and the long-term regulatory response (Dodd-Frank) in light of the identified pre-crisis failures."
+  },
+  {
+    "id": 4,
+    "question": "How did a problem in the U.S. housing market spread to banking systems in Europe and cause sovereign debt crises in multiple countries?",
+    "requires_chunks": ["securitisation_mechanism", "global_contagion", "housing_price_collapse"],
+    "why_hard": "Requires understanding the securitisation mechanism as the transmission vector, then tracing how European exposure led to sovereign debt stress — across three geographically and financially separate phenomena."
+  },
+  {
+    "id": 5,
+    "question": "What was the total human cost of the 2008 financial crisis in terms of jobs lost, economic contraction, and housing losses, and how does this compare to the scale of the government response?",
+    "requires_chunks": ["real_economy_impact", "government_response_tarp", "housing_price_collapse"],
+    "why_hard": "Requires extracting and comparing specific figures from multiple chunks — unemployment numbers, GDP contraction, home price data, and TARP funding levels — to construct a coherent cost-vs-response picture."
+  }
+]

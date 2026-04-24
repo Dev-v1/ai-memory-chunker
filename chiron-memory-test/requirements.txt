@@ -1,0 +1,11 @@
+# Core API framework
+fastapi>=0.111.0
+uvicorn[standard]>=0.30.0
+pydantic>=2.7.0
+python-dotenv>=1.0.0
+
+# Model inference — vLLM bundles torch, transformers, and safetensors
+vllm>=0.4.3
+
+# RunPod serverless handler
+runpod>=1.7.0
