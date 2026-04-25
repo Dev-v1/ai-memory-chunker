@@ -48,6 +48,10 @@ ENV HF_TOKEN=""
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
+# ── Port ────────────────────────────────────────────────────────────────────
+EXPOSE 80
+
 # ── Entry point ─────────────────────────────────────────────────────────────
-# handler.py loads the model at import time, then starts the RunPod listener.
-CMD ["python3", "handler.py"]
+# RunPod HTTP Service routes requests directly to this HTTP server on port 80.
+# main.py loads the model on startup via the FastAPI lifespan hook.
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
